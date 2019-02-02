@@ -265,4 +265,21 @@ public class GitLabPluginConfiguration {
     public String baseUrl() {
         return baseUrl;
     }
+
+    /**
+     * SonarQube target URL for dashboard of branch.
+     * @return SonarQube project dashboard URL
+     */
+    public String targetUrl() {
+        StringBuffer targetUrl = new StringBuffer();
+
+        targetUrl.append(baseUrl);
+        targetUrl.append("dashboard?id=").append(CoreProperties.PROJECT_KEY_PROPERTY);
+
+        if (refName() != null)
+            targetUrl.append("&branch=").append(refName());
+
+        return targetUrl.toString();
+    }
+
 }

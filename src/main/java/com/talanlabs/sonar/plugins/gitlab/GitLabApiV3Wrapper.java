@@ -208,7 +208,7 @@ public class GitLabApiV3Wrapper implements IGitLabApiWrapper {
     @Override
     public void createOrUpdateSonarQubeStatus(String status, String statusDescription) {
         try {
-            gitLabAPIV3.getGitLabAPICommits().postCommitStatus(gitLabProject.getId(), getFirstCommitSHA(), status, config.refName(), COMMIT_CONTEXT, null, statusDescription);
+            gitLabAPIV3.getGitLabAPICommits().postCommitStatus(gitLabProject.getId(), getFirstCommitSHA(), status, config.refName(), COMMIT_CONTEXT, config.targetUrl(), statusDescription);
         } catch (IOException e) {
             // Workaround for https://gitlab.com/gitlab-org/gitlab-ce/issues/25807
             if (e.getMessage() != null && e.getMessage().contains("Cannot transition status")) {
